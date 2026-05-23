@@ -114,6 +114,38 @@ header p {
 
 .stats strong { color: var(--accent); font-weight: 500; }
 
+/* ---------- Filters ---------- */
+.filters {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 16px;
+  animation: fadeDown 0.6s 0.2s ease both;
+}
+
+.filter-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  padding: 7px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.filter-btn:hover { border-color: #444; color: var(--text); }
+
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0d0d0d;
+  font-weight: 500;
+}
+
 /* ---------- Task list ---------- */
 #task-list {
   width: 100%;
@@ -198,15 +230,52 @@ header p {
   width: 100%;
   max-width: 600px;
   text-align: center;
-  padding: 60px 0;
+  padding: 50px 0 40px;
   font-family: 'DM Mono', monospace;
   color: var(--muted);
   font-size: 0.88rem;
   letter-spacing: 0.04em;
   display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
-.empty-state.visible { display: block; }
+.empty-state.visible { display: flex; }
+
+.empty-svg {
+  width: 100px;
+  opacity: 0.4;
+  margin-bottom: 4px;
+}
+
+.empty-state .hint {
+  font-size: 0.75rem;
+  color: #3a3a3a;
+}
+
+/* ---------- Shortcut hint ---------- */
+.shortcut-hint {
+  width: 100%;
+  max-width: 600px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: #333;
+  margin-bottom: 28px;
+  letter-spacing: 0.03em;
+  animation: fadeDown 0.6s 0.12s ease both;
+}
+
+kbd {
+  display: inline-block;
+  background: #1e1e1e;
+  border: 1px solid #2e2e2e;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+}
 
 /* ---------- Clear button ---------- */
 .clear-btn {

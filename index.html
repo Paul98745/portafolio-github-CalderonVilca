@@ -23,16 +23,33 @@
     />
     <button id="add-btn">+ Añadir</button>
   </div>
+  <p class="shortcut-hint"><kbd>/</kbd> para enfocar el campo · <kbd>Enter</kbd> para añadir</p>
 
   <div class="stats">
     <span>Total: <strong id="count-total">0</strong></span>
     <span>Completadas: <strong id="count-done">0</strong></span>
   </div>
 
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">Todas</button>
+    <button class="filter-btn" data-filter="pending">Pendientes</button>
+    <button class="filter-btn" data-filter="done">Completadas</button>
+  </div>
+
   <ul id="task-list"></ul>
 
   <p id="empty-state" class="empty-state">
-    — sin tareas pendientes —
+    <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" class="empty-svg">
+      <rect x="20" y="15" width="80" height="10" rx="5" fill="#2a2a2a"/>
+      <rect x="20" y="33" width="60" height="10" rx="5" fill="#222"/>
+      <rect x="20" y="51" width="70" height="10" rx="5" fill="#222"/>
+      <circle cx="10" cy="20" r="5" fill="#2a2a2a"/>
+      <circle cx="10" cy="38" r="5" fill="#222"/>
+      <circle cx="10" cy="56" r="5" fill="#222"/>
+      <rect x="30" y="75" width="60" height="2" rx="1" fill="#1e1e1e"/>
+    </svg>
+    — sin tareas por aquí —
+    <span class="hint">Presiona <kbd>Enter</kbd> para añadir</span>
   </p>
 
   <button id="clear-done" class="clear-btn">

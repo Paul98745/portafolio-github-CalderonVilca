@@ -5,8 +5,10 @@ const emptyMsg  = document.getElementById('empty-state');
 const clearBtn  = document.getElementById('clear-done');
 const countEl   = document.getElementById('count-total');
 const doneEl    = document.getElementById('count-done');
+const filterBtns = document.querySelectorAll('.filter-btn');
 
-let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+let tasks       = JSON.parse(localStorage.getItem('tasks') || '[]');
+let activeFilter = 'all';
 
 function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -49,9 +51,29 @@ function renderTask(task, index) {
 
 function render() {
   taskList.innerHTML = '';
-  tasks.forEach((task, i) => renderTask(task, i));
+
+  const filtered = tasks.filter(t => {
+    if (activeFilter === 'pending') return !t.done;
+    if (activeFilter === 'done')    return t.done;
+    return true;
+  });
+
+  filtered.forEach((task) => {
+    const realIndex = tasks.indexOf(task);
+    renderTask(task, realIndex);
+  });
+
   updateStats();
 }
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    render();
+  });
+});
 
 function addTask() {
   const text = input.value.trim();
@@ -92,6 +114,13 @@ addBtn.addEventListener('click', addTask);
 
 input.addEventListener('keydown', e => {
   if (e.key === 'Enter') addTask();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement !== input) {
+    e.preventDefault();
+    input.focus();
+  }
 });
 
 clearBtn.addEventListener('click', clearDone);
